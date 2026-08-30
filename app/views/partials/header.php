@@ -20,6 +20,9 @@ if(!isset($tituloPagina)){
         <!--Boostrap icon-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         
+        <!--Data Tables-->
+        <link href="https://cdn.datatables.net/v/dt/dt-3.0.2/datatables.min.css" rel="stylesheet">
+        
         <!--Estilos propios-->
         <link href="../../../public/css/estilos.css" rel="stylesheet">
     </head>

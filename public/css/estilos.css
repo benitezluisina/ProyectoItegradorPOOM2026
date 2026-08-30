@@ -18,6 +18,7 @@
     --shadow-soft: 0 4px 16px rgba(22, 35, 63, 0.06);
 }
 
+
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: var(--color-bg);
@@ -33,6 +34,15 @@ h1, h2, h3, h4, h5, h6,
 .app-navbar {
     background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
     box-shadow: var(--shadow-soft);
+}
+
+.contenedor-fondo {
+    background-image: url("../assets/img/portada6.jpg");
+    /*background-color: #24365C;*/
+    background-size: cover;       /* Ajusta la imagen para cubrir todo el div */
+    background-position: center;  /* Centra el fondo horizontal y verticalmente */
+    background-repeat: no-repeat; /* Evita que la imagen se duplique en mosaico */
+    min-height: 250px;            /* Define una altura mínima para que se vea la imagen */
 }
 
 .app-navbar .brand-mark {
