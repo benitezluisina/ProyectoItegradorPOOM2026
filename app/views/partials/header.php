@@ -24,6 +24,7 @@ if(!isset($tituloPagina)){
         <link href="https://cdn.datatables.net/v/dt/dt-3.0.2/datatables.min.css" rel="stylesheet">
         
         <!--Estilos propios-->
-        <link href="../../../public/css/estilos.css" rel="stylesheet">
+        <link href="/../../public/css/estilos.css" rel="stylesheet">
+        <!--<link href="/../../../public/css/estilos.css" rel="stylesheet">-->
     </head>
     <body>

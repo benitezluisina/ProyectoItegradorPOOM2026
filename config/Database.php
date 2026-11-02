@@ -10,7 +10,7 @@ class Database{
     private PDO $conexion;
 
     //configuración de conexión a BD
-    private string $host = "localhost";
+    private string $host = "127.0.0.1";
     private string $puerto = "3306";
     private string $basedatos = "gc_novedades";
     private string $usuario = "root";
