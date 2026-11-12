@@ -1,6 +1,6 @@
 <?php
 /**
- * app/views/usuarios/editar.php
+ * app/views/Usuarios/editar.php
  * Vista del formulario de modificación de usuarios.
  *
  * Variables que inyecta UsuarioController::editar() / actualizar():
@@ -11,11 +11,12 @@
 
 $tituloPagina  = 'Editar usuario';
 $seccionActiva = 'usuarios';
-$urlAccion     = '/ProyectoIntegradorPOOM2026/public/index.php?ctrl=usuarios&accion=actualizar';
+$urlAccion     = BASE_URL . '/index.php?ctrl=usuarios&accion=actualizar';
 $textoBoton    = 'Guardar cambios';
 
 require_once __DIR__ . '/../partials/header.php';
 require_once __DIR__ . '/../partials/navbar.php';
+require_once __DIR__ . '/../partials/encabezado2.php';
 ?>
 
 <main class="container-fluid px-3 px-lg-4">
@@ -23,8 +24,8 @@ require_once __DIR__ . '/../partials/navbar.php';
     <div class="page-header">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/ProyectoIntegradorPOOM2026/public/index.php" class="text-decoration-none">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="/ProyectoIntegradorPOOM2026/public/index.php?ctrl=usuarios&accion=index" class="text-decoration-none">Usuarios</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>/index.php" class="text-decoration-none">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>/index.php?ctrl=usuarios&accion=index" class="text-decoration-none">Usuarios</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Editar usuario</li>
             </ol>
         </nav>

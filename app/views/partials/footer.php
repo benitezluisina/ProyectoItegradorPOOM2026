@@ -1,9 +1,3 @@
-<?php ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script></footer>
-<script src="https://cdn.datatables.net/v/dt/dt-3.0.2/datatables.min.js" ></script> 
-<script>
-    new DataTable("#example");
-</script>   
 <footer class="app-footer mt-5">
         <div class="container-fluid px-3 px-lg-4 py-4">
             <div class="row gy-4">
@@ -13,7 +7,7 @@
                         <span class="brand-text">Sistema<strong>ABM</strong> </span>
                     </div>
                     <p class="footer-text mb-0">
-                        Módulo de gestión de dato (Alta, baja, modificación) 
+                        Módulo de gestión de dato (Alta, baja, modificación)
                         desarrollado en PHP orientado a objetos con PDO, bajo el patrón MVC.
                     </p>
 
@@ -31,3 +25,15 @@
 
         </div>
     </footer>
+
+<!-- Los scripts van al final, después del footer (antes había un </footer> suelto y faltaba cerrar body y html) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-3.0.2/datatables.min.js" ></script>
+<script>
+    //solo inicializa DataTables en las páginas que tienen una tabla con id="example"
+    if (document.querySelector("#example")) {
+        new DataTable("#example");
+    }
+</script>
+</body>
+</html>

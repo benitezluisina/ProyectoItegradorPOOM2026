@@ -1,5 +1,5 @@
 <?php
-include("header.php");
+require_once __DIR__ . "/header.php";
 ?>
 <div id="carouselExampleCaptions" class="carousel slide">
   <div class="carousel-indicators">
@@ -9,21 +9,21 @@ include("header.php");
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="../../../public/assets/img/portada1.jpg" width="800px" height="200px" class="d-block w-100" alt="1">
+      <img src="<?= BASE_URL ?>/assets/img/portada1.jpg" width="800px" height="200px" class="d-block w-100" alt="1">
       <div class="carousel-caption d-none d-md-block">
         <h5>Primera foto</h5>
         <p>Breve descripción</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="../../../public/assets/img/portada2.jpg" width="800px" height="200px" class="d-block w-100" alt="2">
+      <img src="<?= BASE_URL ?>/assets/img/portada2.jpg" width="800px" height="200px" class="d-block w-100" alt="2">
       <div class="carousel-caption d-none d-md-block">
         <h5>Segunda imagen</h5>
         <p>Breve descripción</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="../../../public/assets/img/portada3.jpg" width="800px" height="200px" class="d-block w-100" alt="2">
+      <img src="<?= BASE_URL ?>/assets/img/portada3.jpg" width="800px" height="200px" class="d-block w-100" alt="2">
       <div class="carousel-caption d-none d-md-block">
         <h5>Tercera imagen</h5>
         <p>Breve descripción</p>

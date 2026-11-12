@@ -1,6 +1,6 @@
 <?php
 /**
- * app/views/usuarios/crear.php
+ * app/views/Usuarios/crear.php
  * Vista del formulario de alta de usuarios.
  *
  * Variables que inyecta UsuarioController::crear() / guardar():
@@ -10,7 +10,7 @@
 
 $tituloPagina  = 'Nuevo usuario';
 $seccionActiva = 'usuarios';
-$urlAccion     = '/ProyectoIntegradorPOOM2026/public/index.php?ctrl=usuarios&accion=guardar';
+$urlAccion     = BASE_URL . '/index.php?ctrl=usuarios&accion=guardar';
 $textoBoton    = 'Crear usuario';
 
 require_once __DIR__ . '/../partials/header.php';
@@ -23,8 +23,8 @@ require_once __DIR__ . '/../partials/encabezado2.php';
     <div class="page-header">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/ProyectoIntegradorPOOM2026/public/index.php" class="text-decoration-none">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="/ProyectoIntegradorPOOM2026/public/index.php?ctrl=usuarios&accion=index" class="text-decoration-none">Usuarios</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>/index.php" class="text-decoration-none">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>/index.php?ctrl=usuarios&accion=index" class="text-decoration-none">Usuarios</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Nuevo usuario</li>
             </ol>
         </nav>

@@ -12,17 +12,22 @@
  *   index.php?ctrl=usuarios&accion=editar&id=3
  *   index.php?ctrl=usuarios&accion=actualizar   (POST)
  *   index.php?ctrl=usuarios&accion=eliminar     (POST)
+ *   index.php?ctrl=novedades&accion=index  (idem crear, guardar, editar, actualizar, eliminar)
  */
 
 session_start();
 
-//require_once __DIR__ . '/../config/config.php';      // define BASE_URL
+require_once __DIR__ . '/../config/config.php';      // define BASE_URL
 require_once __DIR__ . '/../core/autoload.php';
 
 // Lista blanca: solo estos controladores y acciones son accesibles por URL.
 $rutasPermitidas = [
     'usuarios' => [
         'controlador' => \app\controllers\UsuarioController::class,
+        'acciones'    => ['index', 'crear', 'guardar', 'editar', 'actualizar', 'eliminar'],
+    ],
+    'novedades' => [
+        'controlador' => \app\controllers\NovedadController::class,
         'acciones'    => ['index', 'crear', 'guardar', 'editar', 'actualizar', 'eliminar'],
     ],
 ];
@@ -42,4 +47,3 @@ if (!is_string($ctrl) || !is_string($accion)
 $clase       = $rutasPermitidas[$ctrl]['controlador'];
 $controlador = new $clase();
 $controlador->$accion();
-?>

@@ -19,7 +19,7 @@ class Usuario{
     private string $email = "";
     private string $rol = "Lector";
     private string $estado = "Activo";
-    private int $dni;
+    private int $dni = 0;   //valor inicial: una propiedad tipada sin valor da error fatal al usarla
     private string $fechaCreacion = "";
 
     public function __construct()
@@ -29,7 +29,7 @@ class Usuario{
     }
 
     //METODOS DE ALTA, BAJA, MODIFICACIÓN Y LECTURA DE USUARIOS
-    //método crar
+    //método crear
     public function crear(): bool{
         $sql = "INSERT INTO usuarios (nombre, apellido, email, rol, estado, dni) VALUES (:nombre, :apellido, :email, :rol, :estado, :dni)";
 
@@ -39,7 +39,7 @@ class Usuario{
         $stmt->bindParam(':apellido', $this->apellido, PDO::PARAM_STR);
         $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
         $stmt->bindParam(':rol', $this->rol, PDO::PARAM_STR);
-        $stmt->bindParam('estado', $this->estado, PDO::PARAM_STR);
+        $stmt->bindParam(':estado', $this->estado, PDO::PARAM_STR);
         $stmt->bindParam(':dni', $this->dni, PDO::PARAM_INT);
 
         try{
@@ -74,22 +74,33 @@ class Usuario{
         return $stmt->fetch();
     }
 
-    //Buqueda de usuarios por nombre o por mail
-    public function buscar(string $termino): array{
-        $sql = "SELECT id, nombre, apellido, dni, rol, estado, fecha_creacion
+    //Búsqueda de usuarios por nombre, apellido o mail, y opcionalmente por estado.
+    //Con ATTR_EMULATE_PREPARES = false MySQL no permite repetir un mismo parámetro nombrado
+    //en la consulta (error HY093): por eso :nombre, :apellido y :email son tres parámetros distintos.
+    public function buscar(string $termino, string $estado = ''): array{
+        $sql = "SELECT id, nombre, email, apellido, dni, rol, estado, fecha_creacion
                 FROM usuarios
-                WHERE nombre LIKE :termino or email LIKE :termino
-                ORDER BY id DESC";
+                WHERE (nombre LIKE :nombre OR apellido LIKE :apellido OR email LIKE :email)";
+
+        if($estado !== ''){
+            $sql .= " AND estado = :estado";
+        }
+        $sql .= " ORDER BY id DESC";
 
         $stmt = $this->db->prepare($sql);
         $valorbusqueda = '%'.$termino.'%';
-        $stmt->bindParam(':termino', $valorbusqueda, PDO::PARAM_STR);
+        $stmt->bindParam(':nombre', $valorbusqueda, PDO::PARAM_STR);
+        $stmt->bindParam(':apellido', $valorbusqueda, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $valorbusqueda, PDO::PARAM_STR);
+        if($estado !== ''){
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
+        }
         $stmt->execute();
 
         return $stmt->fetchAll();
     }
 
-    //Modificación de los registros
+    //Modificación de los registros (el DNI no se modifica)
     public function actualizar(int $id): bool{
         $sql = "UPDATE usuarios
                 SET nombre = :nombre,
@@ -98,7 +109,7 @@ class Usuario{
                     rol = :rol,
                     estado = :estado
                 WHERE id = :id";
-        
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
         $stmt->bindParam(':apellido', $this->apellido, PDO::PARAM_STR);
@@ -123,7 +134,6 @@ class Usuario{
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-        //return $stmt->execute();
         try{
             return $stmt->execute();
         }catch (PDOException $e){
@@ -132,6 +142,7 @@ class Usuario{
         }
     }
 
+    //Baja lógica: no borra el registro, lo pasa a Inactivo
     public function eliminarBis(int $id): bool{
         $sql = "UPDATE usuarios
                 SET estado = :estado
@@ -142,7 +153,6 @@ class Usuario{
         $stmt->bindParam(':estado', $estadoAct, PDO::PARAM_STR);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-        //return $stmt->execute();
         try{
             return $stmt->execute();
         }catch (PDOException $e){
@@ -161,14 +171,14 @@ class Usuario{
         if ($excluirId !== null) {
             $sql .= " AND id <> :id";
         }
- 
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         if ($excluirId !== null) {
             $stmt->bindParam(':id', $excluirId, PDO::PARAM_INT);
         }
         $stmt->execute();
- 
+
         return (int) $stmt->fetchColumn() > 0;
     }
 
@@ -215,10 +225,10 @@ class Usuario{
         $this->estado = $estado;
     }
 
-    public function getDni(): string{
+    public function getDni(): int{
         return $this->dni;
     }
-    public function setDni(string $dni): void{
+    public function setDni(int $dni): void{
         $this->dni = $dni;
     }
 
@@ -230,5 +240,3 @@ class Usuario{
     }
 
 }
-
-?>
