@@ -33,25 +33,57 @@ Aplicación web para la **gestión de datos (Alta, Baja y Modificación)** desar
 - [ ] Validaciones de formulario (frontend y backend).
 - [ ] Conexión real a la base de datos y reemplazo de los datos de ejemplo por datos dinámicos.
 
-## 📂 Estructura de carpetas (avance actual)
+## 📁 Estructura del proyecto
 
-```
-mi_proyecto/
+```text
+ProyectoItegradorPOOM2026/
 ├── app/
+│   ├── controllers/
+│   │   ├── UsuarioController.php     # Alta, baja, modificación y listado de usuarios
+│   │   └── NovedadController.php     # Alta, baja, modificación y listado de novedades
+│   ├── models/
+│   │   ├── Usuario.php               # Acceso a datos de usuarios (PDO + consultas preparadas)
+│   │   └── Novedad.php               # Acceso a datos de novedades (PDO + consultas preparadas)
 │   └── views/
-│       ├── partials/
-│       │   ├── header.php
-│       │   ├── navbar.php
-│       │   └── footer.php
-│       └── usuarios/
-│           └── index.php
-│
-└── public/
-    ├── css/
-    │   └── estilos.css
-    └── js/
-        └── scripts.js
+│       ├── partials/                 # Componentes reutilizables del frontend
+│       │   ├── header.php            # <head>: Bootstrap, iconos, fuentes y CSS propio
+│       │   ├── navbar.php            # Barra de navegación
+│       │   ├── encabezado2.php       # Banner "Sistema ABM novedades"
+│       │   ├── encabezado.php        # Encabezado con carrusel (no usado en el flujo MVC)
+│       │   └── footer.php            # Pie de página y scripts JS
+│       ├── Usuarios/
+│       │   ├── index.php             # Listado con búsqueda y filtro por estado
+│       │   ├── crear.php             # Vista de alta
+│       │   ├── editar.php            # Vista de modificación
+│       │   └── Formulario.php        # Formulario compartido por alta y edición
+│       └── novedades/
+│           ├── index.php             # Listado con búsqueda y filtro por sección
+│           ├── crear.php             # Vista de alta
+│           ├── editar.php            # Vista de modificación
+│           └── Formulario.php        # Formulario compartido por alta y edición
+├── config/
+│   ├── config.php                    # Define BASE_URL (independiente del nombre de la carpeta)
+│   └── Database.php                  # Conexión PDO (patrón Singleton)
+├── core/
+│   └── autoload.php                  # Autoloader de clases por namespace
+├── public/                           # Única carpeta accesible desde el navegador
+│   ├── index.php                     # Front controller (lista blanca de rutas)
+│   ├── css/
+│   │   └── estilos.css               # Hoja de estilos propia
+│   └── assets/
+│       └── img/                      # Imágenes (portada1.jpg … portada6.jpg)
+├── database/
+│   └── novedades.sql                 # Script de la tabla novedades
+├── test_conexion.php                 # Prueba de conexión (solo desarrollo)
+└── README.md
 ```
+
+### Rutas disponibles
+
+| Módulo    | URL base                                  | Acciones                                                  |
+|-----------|-------------------------------------------|-----------------------------------------------------------|
+| Usuarios  | `public/index.php?ctrl=usuarios&accion=…`  | `index`, `crear`, `guardar`, `editar`, `actualizar`, `eliminar` |
+| Novedades | `public/index.php?ctrl=novedades&accion=…` | `index`, `crear`, `guardar`, `editar`, `actualizar`, `eliminar` |
 
 > La estructura completa del proyecto (incluyendo `config/`, `app/models/`, `app/controllers/`) se irá incorporando a medida que avancemos con la lógica de conexión y el CRUD.
 
